@@ -31,8 +31,8 @@ const finalsData = data.filter(function(item){
 return item.Stage === 'Final';
 })
 return finalsData;
-}
 
+}
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -41,8 +41,8 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-function getYears(array, finalCb) {
-const Years = finalCb(array).map(function(item){
+function getYears(array, finalCB) {
+const Years = finalCB(array).map(function(item){
     return item['Year']
 })
 return Years;
@@ -81,14 +81,12 @@ hint: the strings returned need to exactly match the string in step 4.
  */
 
 function getWinnersByYear(array, yearsCB, winnersCB) {
-const arrayYear = yearsCB(array, getFinals)
 const arrayWinners = winnersCB(array, getFinals)
+const arrayYear = yearsCB(array, getFinals)
 
-return arrayWinners.map(function(item,index){
-    return `In ${arrayYear[index]}, ${item} won the world cup!`
+return arrayWinners.map(function(item, i){
+    return `In ${arrayYear[i]}, ${item} won the world cup!`
 })
-
-
 }
 
 
