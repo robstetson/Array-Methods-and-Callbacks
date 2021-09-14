@@ -26,8 +26,11 @@ Use getFinals to do the following:
 hint - you should be looking at the stage key inside of the objects
 */
 
-function getFinals(/* code here */) {
-   /* code here */
+function getFinals(data) {
+const finalsData = data.filter(function(item){
+return item.Stage === 'Final';
+})
+return finalsData;
 }
 
 
@@ -38,8 +41,11 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-function getYears(/* code here */) {
-    /* code here */
+function getYears(array, finalCb) {
+const Years = finalCb(array).map(function(item){
+    return item['Year']
+})
+return Years;
 }
 
 
@@ -51,8 +57,15 @@ Use the higher-order function getWinners to do the following:
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(array, finalsCB) {
+const finalsGame = finalsCB(array).map(function(item){
+    if(item["Home Team Goals"] > item["Away Team Goals"]) {
+        return item["Home Team Name"]
+    }else{
+        return item["Away Team Name"]
+    }
+})
+return finalsGame;
 }
 
 
@@ -62,13 +75,20 @@ Use the higher-order function getWinnersByYear to do the following:
 1. Receive an array
 2. Receive a callback function getYears from task 3
 3. Receive a callback function getWinners from task 4
-4. Return an array of strings that say "In {year}, {country} won the world cup!" 
+4. Return an array of strings that say 
 
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(array, yearsCB, winnersCB) {
+const arrayYear = yearsCB(array, getFinals)
+const arrayWinners = winnersCB(array, getFinals)
+
+return arrayWinners.map(function(item,index){
+    return `In ${arrayYear[index]}, ${item} won the world cup!`
+})
+
+
 }
 
 
